@@ -1,84 +1,149 @@
-# =====================================================
-# ADD THESE QUESTIONS INSIDE question_bank
-# =====================================================
+import streamlit as st
 
-# =====================================================
-# DATA ENGINEER -> SQL
-# =====================================================
+# =========================================================
+# PAGE CONFIG
+# =========================================================
 
-"SQL": {
+st.set_page_config(
+    page_title="Miracle Recruitment Portal",
+    page_icon="📘",
+    layout="wide"
+)
 
-    "Fresher": [
+# =========================================================
+# THEME TOGGLE
+# =========================================================
 
-        {
-            "question": "What is SQL?",
-            "answer": "SQL is Structured Query Language used to manage relational databases."
-        },
+theme = st.sidebar.toggle("🌙 Dark Mode", value=False)
 
-        {
-            "question": "What is the difference between DELETE and TRUNCATE?",
-            "answer": """
+if theme:
+
+    background = "#0E1117"
+    text = "white"
+    card = "#1E1E1E"
+    border = "#3A3A3A"
+
+else:
+
+    background = "#F4F5F7"
+    text = "#111111"
+    card = "white"
+    border = "#D9D9D9"
+
+# =========================================================
+# CUSTOM CSS
+# =========================================================
+
+st.markdown(f"""
+<style>
+
+.stApp {{
+    background-color: {background};
+    color: {text};
+}}
+
+.question-card {{
+    background-color: {card};
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #0D5EA6;
+    margin-bottom: 20px;
+    border: 1px solid {border};
+}}
+
+.main-title {{
+    font-size: 42px;
+    font-weight: bold;
+    color: #0D5EA6;
+}}
+
+.sub-title {{
+    font-size: 18px;
+    color: gray;
+}}
+
+.stButton button {{
+    background-color: #0D5EA6;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    height: 40px;
+}}
+
+.stButton button:hover {{
+    background-color: #084B87;
+    color: white;
+}}
+
+</style>
+""", unsafe_allow_html=True)
+
+# =========================================================
+# HEADER
+# =========================================================
+
+st.markdown("""
+<div class="main-title">
+🚀 Miracle Recruitment Interview Assistant
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="sub-title">
+Interview Portal for Data Engineers & Power BI Developers
+</div>
+""", unsafe_allow_html=True)
+
+st.divider()
+
+# =========================================================
+# QUESTION BANK
+# =========================================================
+
+question_bank = {
+
+    "Data Engineer": {
+
+        "SQL": {
+
+            "Fresher": [
+
+                {
+                    "question": "What is SQL?",
+                    "answer": "SQL is Structured Query Language used to manage relational databases."
+                },
+
+                {
+                    "question": "What is Primary Key?",
+                    "answer": "Primary Key uniquely identifies rows in a table."
+                },
+
+                {
+                    "question": "Difference between DELETE and TRUNCATE?",
+                    "answer": """
 DELETE removes rows one by one.
 
 TRUNCATE removes all rows quickly.
 """
-        },
+                },
 
-        {
-            "question": "What is a Primary Key?",
-            "answer": "Primary Key uniquely identifies rows in a table."
-        },
+                {
+                    "question": "What is normalization?",
+                    "answer": "Normalization reduces redundancy."
+                },
 
-        {
-            "question": "What is a Foreign Key?",
-            "answer": "Foreign Key creates relationship between tables."
-        },
+                {
+                    "question": "What is JOIN?",
+                    "answer": "JOIN combines data from multiple tables."
+                }
 
-        {
-            "question": "What is normalization?",
-            "answer": "Normalization reduces redundancy and improves data integrity."
-        },
+            ],
 
-        {
-            "question": "Difference between WHERE and HAVING?",
-            "answer": """
-WHERE filters rows before aggregation.
+            "2-4 Years": [
 
-HAVING filters after aggregation.
-"""
-        },
-
-        {
-            "question": "What are joins?",
-            "answer": "Joins combine data from multiple tables."
-        },
-
-        {
-            "question": "Difference between INNER JOIN and LEFT JOIN?",
-            "answer": """
-INNER JOIN returns matching records.
-
-LEFT JOIN returns all left table rows and matching right rows.
-"""
-        },
-
-        {
-            "question": "What is GROUP BY?",
-            "answer": "GROUP BY groups rows sharing same values."
-        },
-
-        {
-            "question": "What is ORDER BY?",
-            "answer": "ORDER BY sorts query results."
-        }
-
-    ],
-
-    "2-4 Years": [
-
-        {
-            "question": "Explain Window Functions.",
-            "answer": """
+                {
+                    "question": "Explain Window Functions.",
+                    "answer": """
 Window functions perform calculations across rows.
 
 Examples:
@@ -87,285 +152,360 @@ RANK()
 LEAD()
 LAG()
 """
-        },
+                },
 
-        {
-            "question": "What is Incremental Loading?",
-            "answer": "Incremental loading loads only changed records."
-        },
+                {
+                    "question": "What is Incremental Loading?",
+                    "answer": "Loads only changed records."
+                },
 
-        {
-            "question": "Difference between UNION and UNION ALL?",
-            "answer": """
+                {
+                    "question": "Difference between UNION and UNION ALL?",
+                    "answer": """
 UNION removes duplicates.
 
 UNION ALL keeps duplicates.
 """
-        },
+                },
 
-        {
-            "question": "What is a CTE?",
-            "answer": "CTE is Common Table Expression used as temporary result set."
-        },
+                {
+                    "question": "What is CTE?",
+                    "answer": "CTE is Common Table Expression."
+                },
 
-        {
-            "question": "What are indexes?",
-            "answer": "Indexes improve query performance."
-        },
+                {
+                    "question": "What are indexes?",
+                    "answer": "Indexes improve query performance."
+                }
 
-        {
-            "question": "What is a stored procedure?",
-            "answer": "Stored Procedure is a reusable SQL program."
-        },
+            ],
 
-        {
-            "question": "What are views?",
-            "answer": "Views are virtual tables created from queries."
-        },
+            "5-8 Years": [
 
-        {
-            "question": "Explain clustered and non-clustered indexes.",
-            "answer": """
-Clustered index changes physical storage order.
-
-Non-clustered index creates separate lookup structure.
+                {
+                    "question": "How do you optimize SQL queries?",
+                    "answer": """
+Use indexes, partitioning,
+optimize joins,
+and avoid SELECT *.
 """
-        },
+                },
 
-        {
-            "question": "What is denormalization?",
-            "answer": "Denormalization improves performance by reducing joins."
-        },
+                {
+                    "question": "Explain table partitioning.",
+                    "answer": "Partitioning divides tables into smaller pieces."
+                },
 
-        {
-            "question": "What is query optimization?",
-            "answer": "Query optimization improves SQL execution performance."
-        }
+                {
+                    "question": "Explain execution plans.",
+                    "answer": "Execution plans show how query executes."
+                },
 
-    ],
+                {
+                    "question": "What is CDC?",
+                    "answer": "CDC captures changed data."
+                },
 
-    "5-8 Years": [
+                {
+                    "question": "Explain SCD Types.",
+                    "answer": """
+SCD handles historical changes.
 
-        {
-            "question": "How do you optimize SQL queries?",
-            "answer": """
-Use indexes, avoid SELECT *, optimize joins,
-partition large tables, and analyze execution plans.
-"""
-        },
-
-        {
-            "question": "Explain table partitioning.",
-            "answer": "Partitioning divides large tables into smaller logical pieces."
-        },
-
-        {
-            "question": "Explain execution plans.",
-            "answer": "Execution plans show how SQL engine executes queries."
-        },
-
-        {
-            "question": "What are materialized views?",
-            "answer": "Materialized views physically store query results."
-        },
-
-        {
-            "question": "Explain deadlocks.",
-            "answer": "Deadlocks occur when processes wait indefinitely for resources."
-        },
-
-        {
-            "question": "How do you handle duplicate records?",
-            "answer": """
-Using ROW_NUMBER(), DISTINCT,
-primary keys, or merge strategies.
-"""
-        },
-
-        {
-            "question": "Explain CDC.",
-            "answer": "CDC captures changed data for incremental processing."
-        },
-
-        {
-            "question": "Difference between OLTP and OLAP?",
-            "answer": """
-OLTP handles transactional systems.
-
-OLAP handles analytical processing.
-"""
-        },
-
-        {
-            "question": "What are surrogate keys?",
-            "answer": "Surrogate keys are system-generated unique identifiers."
-        },
-
-        {
-            "question": "Explain SCD Types.",
-            "answer": """
-SCD handles historical dimension changes.
-
-Types:
 SCD1
 SCD2
 SCD3
 """
-        }
+                }
 
-    ],
+            ],
 
-    "10+ Years": [
+            "10+ Years": [
 
-        {
-            "question": "How would you design scalable ETL frameworks?",
-            "answer": """
-Use metadata-driven architecture,
-logging, auditing, retry mechanisms,
-dynamic pipelines, and parameterization.
+                {
+                    "question": "How do you design enterprise ETL frameworks?",
+                    "answer": """
+Using metadata-driven pipelines,
+logging, auditing,
+and parameterization.
 """
-        },
+                },
 
-        {
-            "question": "How do you handle enterprise CDC?",
-            "answer": """
-Using timestamps, log-based CDC,
-watermarks, and streaming frameworks.
+                {
+                    "question": "Explain enterprise CDC handling.",
+                    "answer": """
+Using timestamps,
+logs,
+and watermark strategies.
 """
-        },
+                },
 
-        {
-            "question": "Explain database sharding.",
-            "answer": "Sharding distributes database across multiple servers."
-        },
-
-        {
-            "question": "How do you design high-performance warehouse?",
-            "answer": """
-Using partitioning, indexing,
-star schema, aggregations,
+                {
+                    "question": "How do you design scalable warehouse architecture?",
+                    "answer": """
+Using partitioning,
+star schema,
+aggregations,
 and optimized storage.
 """
-        },
+                },
 
-        {
-            "question": "Explain distributed query processing.",
-            "answer": "Distributed processing executes queries across multiple nodes."
-        },
+                {
+                    "question": "Explain distributed query processing.",
+                    "answer": "Queries execute across multiple nodes."
+                },
 
-        {
-            "question": "How do you manage SQL security?",
-            "answer": """
-Using RBAC, encryption,
-auditing, masking, and access control.
+                {
+                    "question": "How do you manage data governance?",
+                    "answer": """
+Using security,
+auditing,
+lineage,
+and quality checks.
 """
+                }
+
+            ]
         },
 
-        {
-            "question": "How do you tune enterprise ETL jobs?",
-            "answer": """
-Optimize transformations,
-parallelism, partitioning,
-and incremental strategies.
-"""
-        },
+        "ADF": {
 
-        {
-            "question": "How do you design disaster recovery for databases?",
-            "answer": """
-Using backups, replication,
-geo-redundancy, and failover strategies.
-"""
-        },
+            "Fresher": [
 
-        {
-            "question": "How do you monitor data quality?",
-            "answer": """
-Using validation frameworks,
-audits, reconciliation,
-and profiling techniques.
-"""
-        },
+                {
+                    "question": "What is Azure Data Factory?",
+                    "answer": "ADF is cloud ETL service."
+                }
 
-        {
-            "question": "Explain enterprise data governance.",
-            "answer": """
-Data governance ensures
-security, quality, lineage,
-and compliance.
+            ],
+
+            "2-4 Years": [
+
+                {
+                    "question": "What is Integration Runtime?",
+                    "answer": "Integration Runtime is compute infrastructure."
+                },
+
+                {
+                    "question": "What is Copy Activity?",
+                    "answer": "Copy Activity transfers data."
+                }
+
+            ],
+
+            "5-8 Years": [
+
+                {
+                    "question": "What is parameterization in ADF?",
+                    "answer": "Parameterization allows dynamic pipelines."
+                },
+
+                {
+                    "question": "Explain Mapping Data Flow.",
+                    "answer": "Data Flow performs transformations visually."
+                }
+
+            ],
+
+            "10+ Years": [
+
+                {
+                    "question": "How do you design enterprise reusable pipelines?",
+                    "answer": """
+Using metadata-driven architecture
+and dynamic frameworks.
 """
+                }
+
+            ]
         }
+    },
 
-    ]
+    "Power BI Developer": {
+
+        "DAX": {
+
+            "Fresher": [
+
+                {
+                    "question": "What is Measure?",
+                    "answer": "Measure performs dynamic calculation."
+                }
+
+            ],
+
+            "2-4 Years": [
+
+                {
+                    "question": "What is CALCULATE function?",
+                    "answer": "CALCULATE modifies filter context."
+                },
+
+                {
+                    "question": "Difference between SUM and SUMX?",
+                    "answer": """
+SUM aggregates directly.
+
+SUMX iterates row by row.
+"""
+                }
+
+            ],
+
+            "5-8 Years": [
+
+                {
+                    "question": "Explain context transition.",
+                    "answer": "Context transition converts row to filter context."
+                },
+
+                {
+                    "question": "How do you optimize Power BI reports?",
+                    "answer": """
+Use star schema,
+optimize DAX,
+reduce visuals.
+"""
+                }
+
+            ],
+
+            "10+ Years": [
+
+                {
+                    "question": "How do you architect enterprise Power BI solutions?",
+                    "answer": """
+Using governance,
+security,
+deployment pipelines,
+and semantic models.
+"""
+                }
+
+            ]
+        }
+    }
 }
 
-# =====================================================
-# ADD MORE POWER BI QUESTIONS
-# =====================================================
+# =========================================================
+# SIDEBAR
+# =========================================================
 
-"Performance Tuning": {
+st.sidebar.header("⚙️ Interview Setup")
 
-    "Fresher": [
+role = st.sidebar.selectbox(
+    "Select Role",
+    list(question_bank.keys())
+)
 
-        {
-            "question": "What is Power BI?",
-            "answer": "Power BI is a business intelligence and reporting tool."
-        }
+technology = st.sidebar.selectbox(
+    "Select Technology",
+    list(question_bank[role].keys())
+)
 
-    ],
+experience = st.sidebar.selectbox(
+    "Experience Level",
+    ["Fresher", "2-4 Years", "5-8 Years", "10+ Years"]
+)
 
-    "2-4 Years": [
+# =========================================================
+# GET QUESTIONS
+# =========================================================
 
-        {
-            "question": "What is Import Mode?",
-            "answer": "Import Mode stores data inside Power BI model."
-        },
+questions = question_bank[role][technology][experience]
 
-        {
-            "question": "What is DirectQuery?",
-            "answer": "DirectQuery queries source system directly."
-        }
+# =========================================================
+# SEARCH
+# =========================================================
 
-    ],
+search = st.text_input(
+    "🔍 Search Questions",
+    placeholder="Search by keyword..."
+)
 
-    "5-8 Years": [
+filtered_questions = [
+    q for q in questions
+    if search.lower() in q["question"].lower()
+]
 
-        {
-            "question": "How do you optimize DAX queries?",
-            "answer": """
-Use variables, reduce iterators,
-optimize filter context,
-and avoid unnecessary calculations.
-"""
-        },
+# =========================================================
+# SCORE
+# =========================================================
 
-        {
-            "question": "What is VertiPaq engine?",
-            "answer": "VertiPaq is Power BI in-memory engine."
-        }
+score = 0
 
-    ],
+# =========================================================
+# DISPLAY QUESTIONS
+# =========================================================
 
-    "10+ Years": [
+st.subheader(f"{role} → {technology} → {experience}")
 
-        {
-            "question": "How do you architect enterprise Power BI solutions?",
-            "answer": """
-Using governance, deployment pipelines,
-RLS, semantic models,
-and scalable architecture.
-"""
-        },
+for index, item in enumerate(filtered_questions):
 
-        {
-            "question": "How do you implement Power BI governance?",
-            "answer": """
-Using workspace management,
-security policies,
-certified datasets,
-and auditing.
-"""
-        }
+    with st.container():
 
-    ]
-}
+        st.markdown(
+            f"""
+            <div class="question-card">
+
+            <h3 style="color:#0D5EA6;">
+            Question {index + 1}
+            </h3>
+
+            <p style="font-size:18px;">
+            {item['question']}
+            </p>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        col1, col2 = st.columns([1, 3])
+
+        with col1:
+
+            if st.button(
+                f"Show Answer {index}",
+                key=f"answer_{index}"
+            ):
+                st.success(item["answer"])
+
+        with col2:
+
+            correct = st.checkbox(
+                "✅ Candidate Answered Correctly",
+                key=f"correct_{index}"
+            )
+
+            if correct:
+                score += 1
+
+# =========================================================
+# RESULT
+# =========================================================
+
+st.divider()
+
+st.subheader("📊 Candidate Evaluation")
+
+st.metric(
+    label="Candidate Score",
+    value=f"{score} / {len(filtered_questions)}"
+)
+
+if score >= 10:
+    st.success("✅ Candidate Selected for Next Round")
+
+elif score >= 5:
+    st.warning("⚠️ Candidate Needs Further Evaluation")
+
+else:
+    st.error("❌ Candidate Not Selected")
+
+# =========================================================
+# FOOTER
+# =========================================================
+
+st.divider()
+
+st.caption("Developed for Miracle Software Systems Recruitment Team")
